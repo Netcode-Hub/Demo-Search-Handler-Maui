@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DemoSearchHandler.MainPage"
+             xmlns:viewmodel="clr-namespace:DemoSearchHandler.ViewModel"
+             x:DataType="viewmodel:MainPageViewModel"
+             xmlns:model="clr-namespace:DemoSearchHandler.Models"
+             xmlns:searchHandler="clr-namespace:DemoSearchHandler.Handlers">
+
+    <!--<ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Hello, World!"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Welcome to .NET Multi-platform App UI"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <Button
+                x:Name="CounterBtn"
+                Text="Click me"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>-->
+
+    <Shell.SearchHandler>
+        <searchHandler:ProductSearchHandler Products="{x:Static viewmodel:MainPageViewModel.SearchProducts}" 
+                                            DisplayMemberName="Title" ShowsResults="True" QueryIcon="search" ClearIcon="cancel"
+                                            SearchBoxVisibility="Collapsible" Placeholder="Search Product"
+                                            NavigationRoute="ProductDetails">
+
+            <searchHandler:ProductSearchHandler.ItemTemplate>
+                <DataTemplate x:DataType="model:Product">
+                    <HorizontalStackLayout Spacing="10" Margin="10">
+
+                        <Image Source="{Binding Image}" WidthRequest="50" HeightRequest="50"></Image>
+                        <Label Text="{Binding Title}"></Label>
+
+                    </HorizontalStackLayout>
+
+                </DataTemplate>
+            </searchHandler:ProductSearchHandler.ItemTemplate>
+        </searchHandler:ProductSearchHandler>
+    </Shell.SearchHandler>
+
+
+    <VerticalStackLayout>
+        <ActivityIndicator Color="red" IsRunning="True" IsVisible="{Binding IsBusy}" Margin="20,100,20,20"></ActivityIndicator>
+        <CollectionView ItemsSource="{Binding Products}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Product">
+                    <Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainPageViewModel}}, Path=DetailsCommand}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                        <HorizontalStackLayout Spacing="10">
+                            <Image Source="{Binding Image}" WidthRequest="50" HeightRequest="50"></Image>
+                            <Label Text="{Binding Title}"></Label>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

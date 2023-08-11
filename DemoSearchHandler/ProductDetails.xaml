@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DemoSearchHandler.ProductDetails"
+             Title="ProductDetails"
+             xmlns:viewmodel="clr-namespace:DemoSearchHandler.ViewModel"
+             x:DataType="viewmodel:ProductDetailsViewModel">
+
+    <StackLayout>
+        <Frame Padding="10">
+            <VerticalStackLayout>
+                <HorizontalStackLayout Spacing="10">
+                    <Image Source="{Binding Product.Image} " WidthRequest="50" HeightRequest="50"></Image>
+                    <Label Text=""></Label>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Name: "></Label>
+                    <Label Text="{Binding Product.Title}"></Label>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Price: "></Label>
+                    <Label Text="{Binding Product.Price}"></Label>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Category"></Label>
+                    <Label Text="{Binding Product.Category}"></Label>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Description: "></Label>
+                    <Label Text="{Binding Product.Description}"></Label>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>
